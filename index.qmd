@@ -1,0 +1,177 @@
+---
+title: "Advances in the Shiny Ecosystem"
+subtitle: "Oct 9, 2025"
+author: "Charlie Gao (Open Source - Posit, PBC)"
+footer: "See these slides at https://shikokuchuo.net/sip2025"
+format:
+  revealjs: 
+    slide-number: c/t
+    code-copy: true
+    code-line-numbers: false
+    code-link: true
+    code-overflow: wrap
+    highlight-style: a11y
+    width: "1600"
+    height: "900"
+    incremental: true
+---
+
+##
+
+![](images/shiny-team.jpg)
+
+## In this talk
+
+<br /><br />
+
+::: columns
+::: column
+### [ 1 ]  
+Async
+:::
+
+::: column
+### [ 2 ] 
+OpenTelemetry
+:::
+:::
+
+# [1] Async
+
+## In the Shiny Context
+
+::: columns
+::: column
+<https://rstudio.github.io/promises/>
+
+![](images/promises-website.png)
+:::
+
+::: column
+<https://mirai.r-lib.org>
+
+![](images/mirai-website.png)
+:::
+:::
+
+
+## Email
+
+<br />
+
+### Scheduled Fetch (pre-mirai)
+
+🔄⏳📩
+
+- Click on refresh button to check
+- If there is mail, download it from the server
+
+### Push Notifications (mirai)
+
+📨
+
+- Received as soon as email arrives
+- Already waiting in inbox, can open straight away
+
+## The mirai Design Philosophy
+
+<br />
+
+### ⚙️ Modern Foundation
+
+-   NNG | IPC / TCP / secure TLS | x-language data format support e.g. Arrow
+
+### ⚡️ Extreme Performance
+
+-   Scales to millions of tasks \| 1,000x efficiency \| zero-latency
+    promises
+
+### 🚀 Production First
+
+-   100% reliable evaluation model \| minimal complexity \| no hidden state
+
+### 🌐 Deploy Everywhere
+
+-   Local, remote (SSH), cluster (Slurm,
+    SGE, LSF, PBC) \| modular compute profiles
+
+## mirai.r-lib.org
+
+![](images/mirai.png){width="300"}
+![](images/shiny.png){width="300"}
+![](images/plumber2.svg){width="300"}
+<br />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+![](images/purrr.png){width="300"}
+![](images/tidyverse.svg){width="300"}
+![](images/tidymodels.png){width="300"}
+
+# [2] OpenTelemetry
+
+## OpenTelemetry Tracing - Observability at Scale
+
+![](images/otel-layers.png)
+
+- Performance: reduce span length + reduce span nesting
+- Errors: see where they occur in real use
+- Centralized: aggregate across processes / machines
+- Production use: realtime monitoring
+
+## How to Enable
+
+![](images/otel.svg)
+
+### [1]
+
+Install {otel} and {otelsdk}
+<br /><br />
+
+
+### [2]
+
+Set environment variables
+
+e.g.
+
+```r
+OTEL_TRACES_EXPORTER="http"
+OTEL_EXPORTER_OTLP_ENDPOINT="https://logfire-eu.pydantic.dev"
+OTEL_EXPORTER_OTLP_HEADERS="Authorization=<YOUR-WRITE-TOKEN>"
+```
+
+## OpenTelemetry
+
+![](images/chat-demo.png)
+
+## OpenTelemetry
+
+![](images/chat-screenshot.png)
+
+## OpenTelemetry
+
+![](images/otel-traces.png)
+
+
+## Performance Workflow
+
+Joe Cheng / Shiny in Production (2019) - updated by Barret Schloerke (2025)
+
+1. Enable OpenTelemetry to see span durations
+2. For long spans, use {profvis} to see where code is slow
+3. Optimize slow code:
+  - Move work out of Shiny server *(very often)*
+  - Make code faster *(very often)* ![](images/duckplyr.png){width="60"}
+  - Use caching *(sometimes)* ![](images/shiny.png){width="60"}
+  - Non-blocking reactivity *(sometimes)* ![](images/mirai.png){width="60"}
+  
+. . .
+
+4. Repeat!
+
+## Thanks
+
+#### Advances in the Shiny Ecosystem
+
+<p><br /><br /><img src="images/shiny.png" width="300px"/>
+<img src="images/mirai.png" width="300px"/>
+![](images/otel.svg){width="600"}<br /><br /></p>
