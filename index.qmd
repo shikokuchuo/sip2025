@@ -174,4 +174,5 @@ Joe Cheng / Shiny in Production (2019) - updated by Barret Schloerke (2025)
 
 <p><br /><br /><img src="images/shiny.png" width="300px"/>
 <img src="images/mirai.png" width="300px"/>
-![](images/otel.svg){width="600"}<br /><br /></p>
+![](images/otel.svg){width="600"}
+![](images/qr.png)<br /><br /></p>
