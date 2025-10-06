@@ -1,6 +1,6 @@
 ---
 title: "Advances in the Shiny Ecosystem"
-subtitle: "Oct 9, 2025"
+subtitle: "October 9, 2025"
 author: "Charlie Gao (Open Source - Posit, PBC)"
 footer: "See these slides at https://shikokuchuo.net/sip2025"
 format:
